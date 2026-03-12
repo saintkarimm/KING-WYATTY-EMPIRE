@@ -23,6 +23,8 @@ export default function Hero() {
   const featureBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024;
+    
     const ctx = gsap.context(() => {
       // Initial load animation
       const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
@@ -63,37 +65,54 @@ export default function Hero() {
           '-=0.5'
         );
 
-      // Scroll-driven exit animation
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=130%',
-          pin: true,
-          scrub: 0.6,
-        },
-      });
-
-      // Exit animations (70% - 100%)
-      scrollTl
-        .fromTo(
-          headlineRef.current,
-          { x: 0, opacity: 1 },
-          { x: '-18vw', opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo(
-          imageRef.current,
-          { x: 0, scale: 1, opacity: 1 },
-          { x: '18vw', scale: 0.92, opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo(
-          featureBarRef.current,
-          { y: 0, opacity: 1 },
-          { y: '12vh', opacity: 0, ease: 'power2.in' },
-          0.7
+      // Mobile: Simple fade-in from bottom, no pin
+      if (isMobile) {
+        gsap.fromTo(
+          sectionRef.current,
+          { opacity: 1 },
+          {
+            opacity: 1,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
+          }
         );
+      } else {
+        // Desktop: Pinned scroll animation with reduced exit distances
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=130%',
+            pin: true,
+            scrub: 0.6,
+          },
+        });
+
+        // Exit animations (70% - 100%) - Reduced from ±18vw to ±10vw
+        scrollTl
+          .fromTo(
+            headlineRef.current,
+            { x: 0, opacity: 1 },
+            { x: '-10vw', opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo(
+            imageRef.current,
+            { x: 0, scale: 1, opacity: 1 },
+            { x: '10vw', scale: 0.92, opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo(
+            featureBarRef.current,
+            { y: 0, opacity: 1 },
+            { y: '12vh', opacity: 0, ease: 'power2.in' },
+            0.7
+          );
+      }
     }, sectionRef);
 
     return () => ctx.revert();

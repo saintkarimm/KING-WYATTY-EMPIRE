@@ -12,39 +12,74 @@ export default function ClosingHero() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024;
+    
     const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=120%',
-          pin: true,
-          scrub: 0.6,
-        },
-      });
-
-      // Entrance animations (0% - 30%)
-      scrollTl
-        .fromTo(
+      if (isMobile) {
+        // Mobile: Simple reveal animations with fade and slide from bottom
+        gsap.fromTo(
           imageRef.current,
-          { scale: 0.86, opacity: 0, y: '10vh' },
-          { scale: 1, opacity: 1, y: 0, ease: 'power2.out' },
-          0
-        )
-        .fromTo(
-          contentRef.current?.querySelectorAll('.animate-item') || [],
-          { x: '-10vw', opacity: 0 },
-          { x: 0, opacity: 1, stagger: 0.04, ease: 'power2.out' },
-          0.1
+          { y: 50, opacity: 0 },
+          {
+            y: 0, opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: imageRef.current,
+              start: 'top 85%',
+            },
+          }
         );
+        
+        gsap.fromTo(
+          contentRef.current?.querySelectorAll('.animate-item') || [],
+          { y: 30, opacity: 0 },
+          {
+            y: 0, opacity: 1,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: 'top 85%',
+            },
+          }
+        );
+      } else {
+        // Desktop: Pinned scroll animation with reduced entrance/exit scales
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=120%',
+            pin: true,
+            scrub: 0.6,
+          },
+        });
 
-      // Exit animations (70% - 100%)
-      scrollTl.fromTo(
-        imageRef.current,
-        { scale: 1, opacity: 1 },
-        { scale: 0.96, opacity: 0, ease: 'power2.in' },
-        0.7
-      );
+        // Entrance animations (0% - 30%) - Reduced entrance scale from 0.86 to 0.9
+        scrollTl
+          .fromTo(
+            imageRef.current,
+            { scale: 0.9, opacity: 0, y: '10vh' },
+            { scale: 1, opacity: 1, y: 0, ease: 'power2.out' },
+            0
+          )
+          .fromTo(
+            contentRef.current?.querySelectorAll('.animate-item') || [],
+            { x: '-10vw', opacity: 0 },
+            { x: 0, opacity: 1, stagger: 0.04, ease: 'power2.out' },
+            0.1
+          );
+
+        // Exit animations (70% - 100%) - Reduced exit scale to 0.95
+        scrollTl.fromTo(
+          imageRef.current,
+          { scale: 1, opacity: 1 },
+          { scale: 0.95, opacity: 0, ease: 'power2.in' },
+          0.7
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();

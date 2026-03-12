@@ -12,52 +12,88 @@ export default function PropertyMatch() {
   const iconsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024;
+    
     const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=130%',
-          pin: true,
-          scrub: 0.6,
-        },
-      });
-
-      // Entrance animations (0% - 30%)
-      scrollTl
-        .fromTo(
+      if (isMobile) {
+        // Mobile: Simple reveal animation with scale and fade
+        gsap.fromTo(
           cardRef.current,
-          { scale: 0.65, opacity: 0, y: '10vh' },
-          { scale: 1, opacity: 1, y: 0, ease: 'power2.out' },
-          0
-        )
-        .fromTo(
-          cardRef.current?.querySelectorAll('.animate-text') || [],
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.03, ease: 'power2.out' },
-          0.1
-        )
-        .fromTo(
+          { scale: 0.95, opacity: 0 },
+          {
+            scale: 1, opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: cardRef.current,
+              start: 'top 85%',
+            },
+          }
+        );
+        
+        // Floating icons pop in with back.out easing
+        gsap.fromTo(
           iconsRef.current?.querySelectorAll('.floating-icon') || [],
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, stagger: 0.05, ease: 'back.out(1.7)' },
-          0.15
+          {
+            scale: 1, opacity: 1,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: 'back.out(1.7)',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 80%',
+            },
+          }
         );
+      } else {
+        // Desktop: Pinned scroll animation with reduced scale and exit distance
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=130%',
+            pin: true,
+            scrub: 0.6,
+          },
+        });
 
-      // Exit animations (70% - 100%)
-      scrollTl
-        .fromTo(
-          cardRef.current,
-          { y: 0, opacity: 1 },
-          { y: '-18vh', opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo(
-          iconsRef.current?.querySelectorAll('.floating-icon') || [],
-          { opacity: 1 },
-          { opacity: 0, stagger: 0.02, ease: 'power2.in' },
-          0.7
-        );
+        // Entrance animations (0% - 30%) - Reduced scale from 0.65 to 0.8
+        scrollTl
+          .fromTo(
+            cardRef.current,
+            { scale: 0.8, opacity: 0, y: '10vh' },
+            { scale: 1, opacity: 1, y: 0, ease: 'power2.out' },
+            0
+          )
+          .fromTo(
+            cardRef.current?.querySelectorAll('.animate-text') || [],
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.03, ease: 'power2.out' },
+            0.1
+          )
+          .fromTo(
+            iconsRef.current?.querySelectorAll('.floating-icon') || [],
+            { scale: 0, opacity: 0 },
+            { scale: 1, opacity: 1, stagger: 0.05, ease: 'back.out(1.7)' },
+            0.15
+          );
+
+        // Exit animations (70% - 100%) - Reduced from 18vh to 12vh
+        scrollTl
+          .fromTo(
+            cardRef.current,
+            { y: 0, opacity: 1 },
+            { y: '-12vh', opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo(
+            iconsRef.current?.querySelectorAll('.floating-icon') || [],
+            { opacity: 1 },
+            { opacity: 0, stagger: 0.02, ease: 'power2.in' },
+            0.7
+          );
+      }
     }, sectionRef);
 
     return () => ctx.revert();

@@ -30,58 +30,93 @@ export default function Locations() {
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024;
+    
     const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=130%',
-          pin: true,
-          scrub: 0.6,
-        },
-      });
-
-      // Entrance animations (0% - 30%)
-      scrollTl
-        .fromTo(
+      if (isMobile) {
+        // Mobile: Simple scroll-triggered reveal animations
+        gsap.fromTo(
           titleCardRef.current,
-          { x: '-50vw', opacity: 0 },
-          { x: 0, opacity: 1, ease: 'power2.out' },
-          0
-        )
-        .fromTo(
-          titleCardRef.current?.querySelectorAll('.animate-item') || [],
-          { x: '-10vw', opacity: 0 },
-          { x: 0, opacity: 1, stagger: 0.03, ease: 'power2.out' },
-          0.05
-        )
-        .fromTo(
-          cardsRef.current?.querySelectorAll('.location-card') || [],
-          { x: '60vw', opacity: 0, scale: 0.92 },
-          { x: 0, opacity: 1, scale: 1, stagger: 0.04, ease: 'power2.out' },
-          0.05
-        )
-        .fromTo(
-          cardsRef.current?.querySelectorAll('.card-label') || [],
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.03, ease: 'power2.out' },
-          0.2
+          { y: 50, opacity: 0 },
+          {
+            y: 0, opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: titleCardRef.current,
+              start: 'top 85%',
+            },
+          }
         );
+        
+        gsap.fromTo(
+          cardsRef.current?.querySelectorAll('.location-card') || [],
+          { y: 60, opacity: 0 },
+          {
+            y: 0, opacity: 1,
+            stagger: 0.15,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: 'top 85%',
+            },
+          }
+        );
+      } else {
+        // Desktop: Pinned scroll animation with reduced distances
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=130%',
+            pin: true,
+            scrub: 0.6,
+          },
+        });
 
-      // Exit animations (70% - 100%)
-      scrollTl
-        .fromTo(
-          titleCardRef.current,
-          { x: 0, opacity: 1 },
-          { x: '-18vw', opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo(
-          cardsRef.current?.querySelectorAll('.location-card') || [],
-          { x: 0, opacity: 1 },
-          { x: '-22vw', opacity: 0, stagger: 0.02, ease: 'power2.in' },
-          0.7
-        );
+        // Entrance animations (0% - 30%) - Reduced from ±50vw to ±30vw
+        scrollTl
+          .fromTo(
+            titleCardRef.current,
+            { x: '-30vw', opacity: 0 },
+            { x: 0, opacity: 1, ease: 'power2.out' },
+            0
+          )
+          .fromTo(
+            titleCardRef.current?.querySelectorAll('.animate-item') || [],
+            { x: '-10vw', opacity: 0 },
+            { x: 0, opacity: 1, stagger: 0.03, ease: 'power2.out' },
+            0.05
+          )
+          .fromTo(
+            cardsRef.current?.querySelectorAll('.location-card') || [],
+            { x: '40vw', opacity: 0, scale: 0.92 },
+            { x: 0, opacity: 1, scale: 1, stagger: 0.04, ease: 'power2.out' },
+            0.05
+          )
+          .fromTo(
+            cardsRef.current?.querySelectorAll('.card-label') || [],
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.03, ease: 'power2.out' },
+            0.2
+          );
+
+        // Exit animations (70% - 100%) - Reduced from ±18vw to ±15vw
+        scrollTl
+          .fromTo(
+            titleCardRef.current,
+            { x: 0, opacity: 1 },
+            { x: '-15vw', opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo(
+            cardsRef.current?.querySelectorAll('.location-card') || [],
+            { x: 0, opacity: 1 },
+            { x: '-15vw', opacity: 0, stagger: 0.02, ease: 'power2.in' },
+            0.7
+          );
+      }
     }, sectionRef);
 
     return () => ctx.revert();

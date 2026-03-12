@@ -31,52 +31,88 @@ export default function Mission() {
   const rightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024;
+    
     const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=130%',
-          pin: true,
-          scrub: 0.6,
-        },
-      });
-
-      // Entrance animations (0% - 30%)
-      scrollTl
-        .fromTo(
+      if (isMobile) {
+        // Mobile: Simple reveal animations
+        gsap.fromTo(
           leftRef.current?.querySelector('.mission-title') || null,
-          { x: '-18vw', opacity: 0 },
-          { x: 0, opacity: 1, ease: 'power2.out' },
-          0
-        )
-        .fromTo(
-          leftRef.current?.querySelectorAll('.animate-item') || [],
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.03, ease: 'power2.out' },
-          0.1
-        )
-        .fromTo(
+          { y: 50, opacity: 0 },
+          {
+            y: 0, opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: leftRef.current,
+              start: 'top 85%',
+            },
+          }
+        );
+        
+        // Highlights slide in from right with stagger
+        gsap.fromTo(
           rightRef.current?.querySelectorAll('.highlight-item') || [],
-          { x: '12vw', opacity: 0 },
-          { x: 0, opacity: 1, stagger: 0.04, ease: 'power2.out' },
-          0.1
+          { x: 40, opacity: 0 },
+          {
+            x: 0, opacity: 1,
+            stagger: 0.15,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: rightRef.current,
+              start: 'top 85%',
+            },
+          }
         );
+      } else {
+        // Desktop: Pinned scroll animation with reduced entrance/exit distances
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=130%',
+            pin: true,
+            scrub: 0.6,
+          },
+        });
 
-      // Exit animations (70% - 100%)
-      scrollTl
-        .fromTo(
-          leftRef.current,
-          { x: 0, opacity: 1 },
-          { x: '-12vw', opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo(
-          rightRef.current,
-          { x: 0, opacity: 1 },
-          { x: '12vw', opacity: 0, ease: 'power2.in' },
-          0.7
-        );
+        // Entrance animations (0% - 30%) - Reduced from ±18vw to ±15vw for title, ±12vw to ±10vw for content
+        scrollTl
+          .fromTo(
+            leftRef.current?.querySelector('.mission-title') || null,
+            { x: '-15vw', opacity: 0 },
+            { x: 0, opacity: 1, ease: 'power2.out' },
+            0
+          )
+          .fromTo(
+            leftRef.current?.querySelectorAll('.animate-item') || [],
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.03, ease: 'power2.out' },
+            0.1
+          )
+          .fromTo(
+            rightRef.current?.querySelectorAll('.highlight-item') || [],
+            { x: '10vw', opacity: 0 },
+            { x: 0, opacity: 1, stagger: 0.04, ease: 'power2.out' },
+            0.1
+          );
+
+        // Exit animations (70% - 100%)
+        scrollTl
+          .fromTo(
+            leftRef.current,
+            { x: 0, opacity: 1 },
+            { x: '-10vw', opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo(
+            rightRef.current,
+            { x: 0, opacity: 1 },
+            { x: '10vw', opacity: 0, ease: 'power2.in' },
+            0.7
+          );
+      }
     }, sectionRef);
 
     return () => ctx.revert();

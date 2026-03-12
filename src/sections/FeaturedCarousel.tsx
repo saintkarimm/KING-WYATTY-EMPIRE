@@ -26,52 +26,87 @@ export default function FeaturedCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024;
+    
     const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=140%',
-          pin: true,
-          scrub: 0.6,
-        },
-      });
-
-      // Entrance animations (0% - 30%) - dramatic wipe effect
-      scrollTl
-        .fromTo(
+      if (isMobile) {
+        // Mobile: Simple fade-in from bottom, no clip-path animation
+        gsap.fromTo(
           carouselRef.current,
-          { clipPath: 'inset(0 100% 0 0)' },
-          { clipPath: 'inset(0 0% 0 0)', ease: 'power2.out' },
-          0
-        )
-        .fromTo(
+          { y: 50, opacity: 0 },
+          {
+            y: 0, opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: carouselRef.current,
+              start: 'top 85%',
+            },
+          }
+        );
+        
+        gsap.fromTo(
           '.carousel-arrow',
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, stagger: 0.05, ease: 'back.out(1.7)' },
-          0.15
-        )
-        .fromTo(
-          '.featured-label',
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, ease: 'power2.out' },
-          0.2
+          {
+            scale: 1, opacity: 1,
+            stagger: 0.1,
+            duration: 0.5,
+            ease: 'back.out(1.7)',
+            scrollTrigger: {
+              trigger: carouselRef.current,
+              start: 'top 80%',
+            },
+          }
         );
+      } else {
+        // Desktop: Pinned scroll animation with dramatic clip-path wipe
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=140%',
+            pin: true,
+            scrub: 0.6,
+          },
+        });
 
-      // Exit animations (70% - 100%)
-      scrollTl
-        .fromTo(
-          carouselRef.current,
-          { scale: 1, opacity: 1 },
-          { scale: 0.92, opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo(
-          '.carousel-arrow',
-          { scale: 1, opacity: 1 },
-          { scale: 0.8, opacity: 0, ease: 'power2.in' },
-          0.7
-        );
+        // Entrance animations (0% - 30%) - dramatic wipe effect
+        scrollTl
+          .fromTo(
+            carouselRef.current,
+            { clipPath: 'inset(0 100% 0 0)' },
+            { clipPath: 'inset(0 0% 0 0)', ease: 'power2.out' },
+            0
+          )
+          .fromTo(
+            '.carousel-arrow',
+            { scale: 0, opacity: 0 },
+            { scale: 1, opacity: 1, stagger: 0.05, ease: 'back.out(1.7)' },
+            0.15
+          )
+          .fromTo(
+            '.featured-label',
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, ease: 'power2.out' },
+            0.2
+          );
+
+        // Exit animations (70% - 100%) - Reduced exit scale from 0.92 to 0.95
+        scrollTl
+          .fromTo(
+            carouselRef.current,
+            { scale: 1, opacity: 1 },
+            { scale: 0.95, opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo(
+            '.carousel-arrow',
+            { scale: 1, opacity: 1 },
+            { scale: 0.8, opacity: 0, ease: 'power2.in' },
+            0.7
+          );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
