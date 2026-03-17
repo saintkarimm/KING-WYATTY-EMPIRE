@@ -134,7 +134,7 @@ export default function ClosingHero() {
                     <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
                   <a
-                    href="tel:+233556885510"
+                    href="tel:+233246151688"
                     className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white rounded-xl px-5 lg:px-6 py-4 lg:py-5 text-sm font-medium backdrop-blur-sm transition-colors"
                   >
                     <Phone className="w-4 h-4" />

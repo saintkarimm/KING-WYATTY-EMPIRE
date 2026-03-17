@@ -11,7 +11,7 @@ interface Message {
 const initialMessages: Message[] = [
   {
     role: 'assistant',
-    content: 'Hello! Welcome to King Wyatt Empire. How can I help you find your perfect property today?',
+    content: 'Hello! Welcome to Dream Luxury Real Estate Agency. How can I help you find your perfect property today?',
   },
 ];
 
@@ -20,14 +20,18 @@ const knowledgeBase: Record<string, string> = {
   'spintex': 'Absolutely! We offer rental and sale properties in Spintex. It\'s a vibrant area with great connectivity. Shall I show you what\'s available?',
   'airport residential': 'Yes, we have premium properties in Airport Residential Area. This is one of the most sought-after neighborhoods in Accra.',
   'cantonments': 'We have beautiful properties in Cantonments! This area is known for its serene environment and upscale residences.',
+  'nmai-dzorm': 'We have properties in Nmai-Dzorm and surrounding areas. Visit our office on the Trasacco Estate Road to learn more!',
+  'trasacco': 'Our office is located on the Trasacco Estate Road in Nmai-Dzorm. We\'d love to meet you!',
   'rent': 'We have a wide range of rental properties across Accra. Could you tell me your preferred location and budget?',
-  'buy': 'We can definitely help you buy property in Accra! We serve East Legon, Airport Residential, Cantonments, Spintex, and many other prime areas.',
-  'land': 'Yes, we specialize in land acquisition with verified documentation. We can help you secure plots in prime locations across Accra.',
-  'airbnb': 'Yes, we offer full Airbnb management services including listing optimization, guest communication, and pricing strategy.',
-  'office': 'Our office is located in East Legon Hills, Accra. You\'re welcome to visit us or we can schedule a meeting at your convenience.',
-  'contact': 'You can reach us at +233 55 688 5510 or email Kingwyattempire@gmail.com. Our office is in East Legon Hills, Accra.',
-  'price': 'Our property prices vary based on location and type. Rental properties start from $450/month for studios, and we have options for every budget.',
-  'hello': 'Hello! Welcome to King Wyatt Empire. How can I help you find your perfect property today?',
+  'buy': 'We can definitely help you buy property in Accra! We serve East Legon, Airport Residential, Cantonments, Spintex, Nmai-Dzorm, and many other prime areas.',
+  'land': 'Yes, we specialize in land acquisition with verified documentation. We also offer land surveillance services to ensure your investment is secure.',
+  'architectural': 'Yes, we provide architectural drawing services for your building projects. Our team can help bring your vision to life.',
+  'consulting': 'We offer property consulting and valuation services to help you make informed decisions about your real estate investments.',
+  'materials': 'We can supply building materials for your construction projects. Contact us for quality materials at competitive prices.',
+  'office': 'Our office is located at Nmai-Dzorm, E Legon - Trasacco Estate Road. You\'re welcome to visit us or we can schedule a meeting at your convenience.',
+  'contact': 'You can reach us at 024 615 1688 or email info@dreamluxuryrealestate.com. Our office is at Nmai-Dzorm, E Legon - Trasacco Estate Rd.',
+  'price': 'Our property prices vary based on location and type. Rental properties start from affordable rates for studios, and we have options for every budget.',
+  'hello': 'Hello! Welcome to Dream Luxury Real Estate Agency. How can I help you find your perfect property today?',
   'hi': 'Hi there! I\'m here to help you with your real estate needs. What are you looking for?',
 };
 
@@ -40,7 +44,7 @@ function getResponse(input: string): string {
     }
   }
   
-  return "I'd be happy to help! King Wyatt Empire offers rentals, property sales, land acquisition, Airbnb services, and full property management in East Legon, Spintex, Airport Residential, and other prime areas in Accra. What specific information are you looking for?";
+  return "I'd be happy to help! Dream Luxury Real Estate Agency offers rentals, property sales, land acquisition, architectural drawings, land surveillance, building materials supply, property consulting and valuation in East Legon, Spintex, Airport Residential, Nmai-Dzorm, and other prime areas in and outside Accra. What specific information are you looking for?";
 }
 
 export default function Chatbot() {
@@ -107,7 +111,7 @@ export default function Chatbot() {
             <Bot className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h4 className="font-serif font-semibold text-white">King Wyatt Assistant</h4>
+            <h4 className="font-serif font-semibold text-white">Dream Luxury Assistant</h4>
             <p className="text-xs text-white/70">Online</p>
           </div>
         </div>

@@ -53,10 +53,10 @@ export default function Navigation() {
               className="flex items-center gap-2"
             >
               <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-vivid-blue flex items-center justify-center">
-                <span className="text-white font-serif font-bold text-sm lg:text-lg">K</span>
+                <span className="text-white font-serif font-bold text-sm lg:text-lg">D</span>
               </div>
               <span className="font-serif font-semibold text-near-black text-sm lg:text-base">
-                King Wyatt Empire
+                Dream Luxury Real Estate
               </span>
             </a>
 
@@ -81,11 +81,11 @@ export default function Navigation() {
             {/* Right Side */}
             <div className="flex items-center gap-3 lg:gap-4">
               <a
-                href="tel:+233556885510"
+                href="tel:+233246151688"
                 className="hidden md:flex items-center gap-2 text-sm text-near-black/80 hover:text-vivid-blue transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span>+233 55 688 5510</span>
+                <span>024 615 1688</span>
               </a>
               <Button
                 onClick={() => scrollToSection('#contact')}
@@ -135,11 +135,11 @@ export default function Navigation() {
             ))}
             <div className="pt-2 border-t border-gray-100">
               <a
-                href="tel:+233556885510"
+                href="tel:+233246151688"
                 className="flex items-center gap-3 p-3 text-vivid-blue"
               >
                 <Phone className="w-5 h-5" />
-                <span className="font-medium">+233 55 688 5510</span>
+                <span className="font-medium">024 615 1688</span>
               </a>
             </div>
           </div>

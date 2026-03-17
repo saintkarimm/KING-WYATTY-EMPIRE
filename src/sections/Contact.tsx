@@ -114,7 +114,7 @@ export default function Contact() {
                   <MapPin className="w-5 h-5 text-vivid-blue" />
                 </div>
                 <span className="text-sm lg:text-base text-near-black">
-                  East Legon Hills, Accra
+                  Nmai-Dzorm, E Legon - Trasacco Estate Rd
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -122,10 +122,10 @@ export default function Contact() {
                   <Phone className="w-5 h-5 text-vivid-blue" />
                 </div>
                 <a
-                  href="tel:+233556885510"
+                  href="tel:+233246151688"
                   className="text-sm lg:text-base text-near-black hover:text-vivid-blue transition-colors"
                 >
-                  +233 55 688 5510
+                  024 615 1688
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -133,10 +133,10 @@ export default function Contact() {
                   <Mail className="w-5 h-5 text-vivid-blue" />
                 </div>
                 <a
-                  href="mailto:Kingwyattempire@gmail.com"
+                  href="mailto:info@dreamluxuryrealestate.com"
                   className="text-sm lg:text-base text-near-black hover:text-vivid-blue transition-colors"
                 >
-                  Kingwyattempire@gmail.com
+                  info@dreamluxuryrealestate.com
                 </a>
               </div>
             </div>

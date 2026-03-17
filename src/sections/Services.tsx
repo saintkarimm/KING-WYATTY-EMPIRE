@@ -27,33 +27,33 @@ const services = [
   },
   {
     icon: MapPin,
-    title: 'Land Sales',
+    title: 'Land Sales & Acquisition',
     description: 'Secure plots with verified documentation.',
   },
   {
     icon: Building,
-    title: 'Airbnb Management',
-    description: 'End-to-end guest experience & pricing.',
+    title: 'Architectural Drawings',
+    description: 'Professional designs for your dream home.',
   },
   {
     icon: Briefcase,
-    title: 'Full Property Management',
-    description: 'Maintenance, tenants, and reporting.',
+    title: 'Land Surveillance',
+    description: 'Protect your land investment with monitoring.',
   },
   {
     icon: TrendingUp,
-    title: 'Investment Advisory',
-    description: 'Data-driven guidance for ROI.',
+    title: 'Building Materials Supply',
+    description: 'Quality materials for construction projects.',
   },
   {
     icon: FileText,
-    title: 'Document Support',
-    description: 'Contracts, permits, and due diligence.',
+    title: 'Property Consulting',
+    description: 'Expert advice for informed decisions.',
   },
   {
     icon: Users,
-    title: 'Relocation Assistance',
-    description: 'Settle in smoothly, start to finish.',
+    title: 'Property Valuation',
+    description: 'Accurate assessments for buying or selling.',
   },
 ];
 
@@ -119,8 +119,8 @@ export default function Services() {
               Our Real Estate Services
             </h2>
             <p className="text-base lg:text-lg text-cool-gray max-w-xl">
-              A full-service team for rentals, sales, land deals, Airbnb hosting,
-              and property management.
+              A registered real estate company offering rentals, sales, land deals,
+              architectural drawings, land surveillance, and building materials supply.
             </p>
           </div>
         </div>

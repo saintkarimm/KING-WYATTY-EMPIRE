@@ -9,17 +9,18 @@ const footerLinks = {
   services: [
     { name: 'Property Rentals', href: '#listings' },
     { name: 'Property Sales', href: '#listings' },
-    { name: 'Land Sales', href: '#services' },
-    { name: 'Airbnb Management', href: '#services' },
-    { name: 'Property Management', href: '#services' },
+    { name: 'Land Sales & Acquisition', href: '#services' },
+    { name: 'Architectural Drawings', href: '#services' },
+    { name: 'Land Surveillance', href: '#services' },
+    { name: 'Property Consulting & Valuation', href: '#services' },
   ],
   locations: [
     { name: 'East Legon', href: '#locations' },
     { name: 'Airport Residential', href: '#locations' },
     { name: 'Cantonments', href: '#locations' },
     { name: 'Spintex', href: '#locations' },
-    { name: 'Adenta', href: '#locations' },
-    { name: 'Oyarifa', href: '#locations' },
+    { name: 'Nmai-Dzorm', href: '#locations' },
+    { name: 'Trasacco Estate', href: '#locations' },
   ],
 };
 
@@ -79,14 +80,14 @@ export default function Footer() {
           <div className="footer-column sm:col-span-2 lg:col-span-1">
             <a href="#home" className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-full bg-vivid-blue flex items-center justify-center">
-                <span className="text-white font-serif font-bold text-lg">K</span>
+                <span className="text-white font-serif font-bold text-lg">D</span>
               </div>
               <span className="font-serif font-semibold text-near-black">
-                King Wyatt Empire
+                Dream Luxury Real Estate
               </span>
             </a>
             <p className="text-sm text-cool-gray mb-6 leading-relaxed">
-              From Keys to Comfort — We&apos;ve Got You Covered.
+              Your trusted partner for rentals, sales, land, architectural drawings, and property consulting across Accra.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social, index) => (
@@ -157,25 +158,25 @@ export default function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-vivid-blue mt-0.5 flex-shrink-0" />
                 <span className="text-sm text-cool-gray">
-                  East Legon Hills, Accra
+                  Nmai-Dzorm, E Legon - Trasacco Estate Rd
                 </span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-vivid-blue flex-shrink-0" />
                 <a
-                  href="tel:+233556885510"
+                  href="tel:+233246151688"
                   className="text-sm text-cool-gray hover:text-vivid-blue transition-colors"
                 >
-                  +233 55 688 5510
+                  024 615 1688
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-vivid-blue flex-shrink-0" />
                 <a
-                  href="mailto:Kingwyattempire@gmail.com"
+                  href="mailto:info@dreamluxuryrealestate.com"
                   className="text-sm text-cool-gray hover:text-vivid-blue transition-colors"
                 >
-                  Kingwyattempire@gmail.com
+                  info@dreamluxuryrealestate.com
                 </a>
               </li>
             </ul>
@@ -186,7 +187,7 @@ export default function Footer() {
         <div className="pt-6 lg:pt-8 border-t border-gray-200">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs lg:text-sm text-cool-gray text-center sm:text-left">
-              &copy; {new Date().getFullYear()} King Wyatt Empire. All rights
+              &copy; {new Date().getFullYear()} Dream Luxury Real Estate Agency Ltd. All rights
               reserved.
             </p>
             <div className="flex gap-4 lg:gap-6">

@@ -23,6 +23,14 @@ const highlights = [
     icon: HeartHandshake,
     text: 'Post-move-in care',
   },
+  {
+    icon: FileText,
+    text: 'Architectural drawings & land surveillance',
+  },
+  {
+    icon: HeartHandshake,
+    text: 'Building materials supply',
+  },
 ];
 
 export default function Mission() {
@@ -142,9 +150,10 @@ export default function Mission() {
               Our Mission — Your Comfort
             </h2>
             <p className="animate-item text-base lg:text-lg text-cool-gray mb-6 lg:mb-8 leading-relaxed max-w-lg">
-              We believe finding a home should feel human. That means honest
-              advice, fast responses, and support that doesn&apos;t end at the
-              handshake.
+              Dream Luxury Real Estate Agency is a registered company dedicated to
+              providing exceptional real estate services. From rentals and sales to
+              architectural drawings and land surveillance—we&apos;re with you every
+              step of the way.
             </p>
             <div className="animate-item">
               <Button
